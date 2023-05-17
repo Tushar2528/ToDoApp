@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <title>
+            My page
+        </title>
+        <script src="https://kit.fontawesome.com/f9afaa8246.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/css/home.css">
+    </head>
+
+    <body>
+
+        <!-- **********************Container for the todo list app******************* -->
+
+
+        <div class="container">
+            <h1 style="text-align: center; padding-top: 2%; color: #08a4a7;">To Do App</h1>
+            <div class="form-container">
+
+                <!-- ***********Form to populate the todo list by entering new data on the page************ -->
+                
+                <form action="/add_todo" method="POST">
+                    <div class="top-section">
+                        <div class="top-section1">
+                            <label style="margin-left: 2%;" for="description">DESCRIPTION : </label>
+                            <input style="color: #00c0ff;" type="text" id="description" name="description" placeholder="What do you need to do">
+                        </div>
+                        <div class="top-section2">
+                            <div class="dropdown" >
+                                
+                                    <label style="margin-left: 4%;" for="category">CATEGORY : </label>
+                                    <select  style="border: 0; padding: 5px; color: #00c0ff;" name="category" id="category" >
+                                    <option  value="Personal">Personal</option>
+                                    <option  value="School">School</option>
+                                    <option  value="Work">Work</option>
+                                    <option value="Cleaning">Cleaning</option>
+                                    <option  value="Other">Other</option>
+                                    </select>
+                                
+                            </div>
+                            <div class="date">
+                                <label style="margin-left: 4%; color: #00c0ff;" for="date">DATE : </label>
+                                <input type="date" id="date" name="date">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="middle-section">
+                        <a href="#"><button name="action" value="add" type="submit" style="background-color: #0040ff;"><i class="fa-regular fa-plus"></i> ADD TASK</button></a>
+
+                        <button name="action" value="delete" type="submit" style="background-color: #ff0000;"><i class="fa-sharp fa-solid fa-trash"></i>DELETE ALL</button>
+
+                    </div>
+                </form>
+
+                <!-- ***************************Form ended************************************ -->
+                
+            </div>
+
+            <div class="bottom-section">
+
+                <!-- *****************looping over the todolist items from the DB/array and rendering on the page***************** -->
+                
+                    <% for ( let i of todolist ) {%>
+                        
+                        
+                            <div>
+                                <input style="margin-right: 6%;" type="checkbox" id="<%= i.category%>" class="checkbox-todo" name="<%= i.description%>" value="<%= i.category%>">
+                                
+                           
+                                <label style="display: inline-block; width: 100%;" for="<%= i.category%>">
+                                    <h4 style="margin-bottom: -5px;"><%= i.description%></h4>
+                                    <p><i style="padding-right: 10px;" class="fa-sharp fa-solid fa-calendar-days"></i><%= i.date%></p>
+                                </label>
+                                <a  href="/delete-item/?id=<%= i._id%>" >Remove/Delete</a>
+                                <button style="height: 60%;width: 90px; margin-right: 3%; padding: 1%; border-radius: 5px;
+                                 border: 1px solid darkgray"><%= i.category%></button>
+                            </div>
+                            
+                            
+                            
+                        
+                    <%}%>
+                
+            </div>
+
+        </div>
+        
+
+        
+    </body>
+</html>
